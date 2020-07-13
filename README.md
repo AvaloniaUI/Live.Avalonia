@@ -2,6 +2,8 @@
 
 This repository demonstrates how to use the hot reload feature in your Avalonia applications. The core idea is to rely on `dotnet watch` for rebuilding the projects from sources when any of the source files change, and to re-embed the updated controls into the `Window` without any need to press the 'Run' button by hands multiple times.
 
+<img src="./demo.gif" width="600" />
+
 ### Getting Started
 
 1. Create a new project based on a template from the [Avalonia Templates repository](https://github.com/AvaloniaUI/avalonia-dotnet-templates). Or, use [AvaloniaVS](https://marketplace.visualstudio.com/items?itemName=AvaloniaTeam.AvaloniaforVisualStudio).
@@ -29,14 +31,12 @@ window.Show();
 ```
 6. Run your project using .NET CLI, as follows:
 ```sh
-# Don't use the 'dotnet run' without the '--no-build' argument.
-dotnet run --no-build
+# Don't use the 'dotnet run' because it is locking the files.
+dotnet ./bin/Debug/netcoreapp3.1/Your.AssemblyName.dll
 ```
 
-> **Important Note**: Don't use the `dotnet run` command without the `--no-build` argument! Always use `dotnet run --no-build`, or `dotnet build && dotnet run --no-build`. Otherwise the executable file will get locked, see: https://github.com/dotnet/sdk/issues/11766
+> **Important Note**: Don't use the `dotnet run` command! Always use `dotnet ./path/to/assembly.dll`, or `dotnet build && dotnet ./path/to/assembly.dll`. Otherwise the executable file will get locked, see: https://github.com/dotnet/sdk/issues/11766
 
-7. Done! Make some changes in the control returned by `CreateReloadableControl`, press `Ctrl+S` and the app will hot-reload. If you experience any issues with this setup, try cloning this repository and running the `Avalonia.HotReload.Sample` project by executing `dotnet run --no-build` from the project root.
+7. Done! Make some changes in the control returned by `CreateReloadableControl`, press `Ctrl+S` and the app will hot-reload. If you experience any issues with this setup, try cloning this repository and running the `Avalonia.HotReload.Sample` project by executing `dotnet build && dotnet ./bin/Debug/netcoreapp3.1/Avalonia.HotReload.Sample.dll` from the project root.
 
 > **Important Note**: By default, `dotnet watch` tracks changes in `.cs` files only. In order to have hot-reload working with `.xaml` files, add the `<Watch Include="**\*.xaml" />` directive to your `.csproj` file. See the [project file](https://github.com/worldbeater/Avalonia.HotReload/blob/master/Avalonia.HotReload.Sample/Avalonia.HotReload.Sample.csproj) in the demo project for more context.
-
-<img src="./demo.gif" width="800" />
