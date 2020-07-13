@@ -26,7 +26,7 @@ var window = new AvaloniaReloadingWindow(assembly, Console.WriteLine);
 window.Show();
 ```
 
-5. Done! Make some changes in what the `CreateReloadableControl`, press `Ctrl+S` and the app will hot-reload.
+5. Done! Make some changes in what the `CreateReloadableControl` returns, press `Ctrl+S` and the app will hot-reload.
 6. If you experience any issues, clone this repository and play with the `Avalonia.HotReload.Sample` project.
 
 > **Important Note**: By default, `dotnet watch` tracks changes in `.cs` files only. In order to have hot-reload working with `.xaml` files, add the `<Watch Include="**\*.xaml" />` directive to your `.csproj` file. See the [project file](https://github.com/worldbeater/Avalonia.HotReload/blob/master/Avalonia.HotReload.Sample/Avalonia.HotReload.Sample.csproj) in the demo project for more context.
