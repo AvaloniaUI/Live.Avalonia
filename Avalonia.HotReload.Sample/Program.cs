@@ -1,9 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Logging.Serilog;
+using Avalonia.Media;
 using Avalonia.ReactiveUI;
 using Avalonia.VisualTree;
-using JetBrains.Annotations;
 
 namespace Avalonia.HotReload.Sample
 {
@@ -19,8 +19,8 @@ namespace Avalonia.HotReload.Sample
         
         /// This method is called by the AvaloniaReloadingWindow. 
         /// It may return any type inherent from 'object', and accept
-        /// a 'Window' as the first and only argument.  
-        [UsedImplicitly]
+        /// a 'Window' as the first and only argument. Run the project
+        /// and try changing the controls below.
         public static IVisual CreateReloadableControl(Window window) =>
             new Grid
             {
