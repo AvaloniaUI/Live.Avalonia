@@ -7,7 +7,7 @@ using Microsoft.Build.Evaluation;
 
 namespace Live.Avalonia
 {
-    internal sealed class AvaloniaReloadingBuilder
+    public sealed class AvaloniaReloadingBuilder
     {
         private readonly string _projectDirectory;
         private readonly Action<string> _logger;

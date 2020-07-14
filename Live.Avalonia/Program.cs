@@ -8,13 +8,9 @@ namespace Live.Avalonia
     {
         public static void Main(string[] args)
         {
-            new AvaloniaReloadingTool(
-                    args.Contains("debug")
-                        ? "../Live.Avalonia.Sample" 
-                        : Directory.GetCurrentDirectory(), 
-                    args.Contains("verbose"), 
-                    Console.WriteLine)
-                .Run();
+            var verboseLogging = args.Contains("verbose");
+            var debug = args.Contains("debug") ? "../Live.Avalonia.Sample" : Directory.GetCurrentDirectory();
+            new AvaloniaReloadingTool(debug, verboseLogging, Console.WriteLine).Run();
         }
     }
 }

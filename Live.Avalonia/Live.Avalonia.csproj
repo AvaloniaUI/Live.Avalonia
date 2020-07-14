@@ -4,7 +4,7 @@
     <PackAsTool>true</PackAsTool>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <ToolCommandName>live-avalonia</ToolCommandName>
-    <AssemblyName>Reloading.Avalonia.Tool</AssemblyName>
+    <AssemblyName>Live.Avalonia</AssemblyName>
     <Description>.NET Core Global Tool: Avalonia Live Reloading Tool.</Description>
     <PackageTags>dotnet, global tools, reloading, avalonia, avaloniaui, xaml</PackageTags>
     <RepositoryUrl>https://github.com/worldbeater/avalonia.hotreload.git</RepositoryUrl>
