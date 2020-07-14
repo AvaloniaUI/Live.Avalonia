@@ -1,35 +1,33 @@
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Logging.Serilog;
-using Avalonia.Media;
 using Avalonia.ReactiveUI;
-using Avalonia.VisualTree;
+using JetBrains.Annotations;
 
-namespace Avalonia.HotReload.Sample
+namespace Avalonia.Reloading.Sample
 {
     public static class Program
     {
-        public static void Main(string[] args) => 
+        public static void Main(string[] args) => BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+
+        [UsedImplicitly]
+        public static AppBuilder BuildAvaloniaApp() =>
             AppBuilder
                 .Configure<App>()
                 .UsePlatformDetect()
                 .UseReactiveUI()
-                .LogToDebug()
-                .StartWithClassicDesktopLifetime(args);
-        
-        /// This method is called by the AvaloniaReloadingWindow. 
-        /// It may return any type inherent from 'object', and accept
-        /// a 'Window' as the first and only argument. Run the project
-        /// and try changing the controls below.
-        public static IVisual CreateReloadableControl(Window window) =>
+                .LogToDebug();
+
+        [UsedImplicitly]
+        public static object CreateReloadableControl(Window window) =>
             new Grid
             {
                 Children =
                 {
                     new Border
                     {
-                        MaxWidth = 300,
-                        MaxHeight = 300,
+                        Width = 500,
+                        Height = 300,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
                         Classes = Classes.Parse("Card"),

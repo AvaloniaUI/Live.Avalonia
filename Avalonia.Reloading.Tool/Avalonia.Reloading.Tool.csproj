@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <PackAsTool>true</PackAsTool>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ToolCommandName>dotnet-hot-avalonia</ToolCommandName>
+    <AssemblyName>dotnet-hot-avalonia</AssemblyName>
+    <Description>.NET Core Global Tool: Avalonia hot reloading plugin.</Description>
+    <PackageTags>dotnet, global tools, reloading, avalonia, avaloniaui, xaml</PackageTags>
+    <RepositoryUrl>https://github.com/worldbeater/avalonia.hotreload.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/worldbeater/avalonia.hotreload</PackageProjectUrl>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.9.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.0" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.0" />
+    <PackageReference Include="Microsoft.Build" Version="16.6.0" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.6.0" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.6.0" />
+    <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="3.1.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.5" />
+    <PackageReference Include="Microsoft.NET.HostModel" Version="3.1.5" />
+    <PackageReference Include="NuGet.Frameworks" Version="5.6.0" />
+    <PackageReference Include="NuGet.Packaging" Version="5.6.0" />
+    <PackageReference Include="NuGet.ProjectModel" Version="5.6.0" />
+  </ItemGroup>
+</Project>
