@@ -26,7 +26,7 @@ namespace Live.Avalonia.Sample
                 new Border
                 {
                     Width = 500,
-                    Height = 300,
+                    Height = 200,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     Classes = Classes.Parse("Card"),

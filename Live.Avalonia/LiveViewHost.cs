@@ -1,6 +1,9 @@
 using System;
+using System.Diagnostics;
+using System.Net.Mime;
 using System.Reactive.Linq;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
 
 namespace Live.Avalonia
@@ -27,6 +30,17 @@ namespace Live.Avalonia
                 .Select(unit => extractor.ExtractCreateViewMethod(_assemblyPath))
                 .Subscribe(method => Content = method(this), 
                            error => _logger($"Unable to reload view: {error}"));
+
+            AppDomain.CurrentDomain.ProcessExit += (sender, args) =>
+            {
+                Dispose();
+                Process.GetCurrentProcess().Kill();
+            };
+            Console.CancelKeyPress += (sender, args) =>
+            {
+                Dispose();
+                Process.GetCurrentProcess().Kill();
+            };
         }
 
         public void StartWatchingProjectFiles()
@@ -38,9 +52,11 @@ namespace Live.Avalonia
 
         public void Dispose()
         {
+            _logger("Disposing LiveViewHost internals...");
             _sourceWatcher.Dispose();
             _assemblyWatcher.Dispose();
             _subscription.Dispose();
+            _logger("Successfully disposed LiveViewHost internals.");
         }
     }
 }

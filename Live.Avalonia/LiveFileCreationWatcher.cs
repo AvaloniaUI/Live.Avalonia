@@ -41,6 +41,7 @@ namespace Live.Avalonia
 
         public void Dispose()
         {
+            _logger("Stopping the file creation watcher timer...");
             _fileChanged.Dispose();
             _timerSubscription?.Dispose();
         }
