@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Reactive;
 using System.Reactive.Linq;
 using Avalonia.Controls;
 using Avalonia.Threading;
@@ -26,14 +27,14 @@ namespace Live.Avalonia
                 .FileChanged
                 .ObserveOn(AvaloniaScheduler.Instance)
                 .Select(unit => extractor.ExtractCreateViewMethod(_assemblyPath))
-                .Subscribe(method => Content = method(this), 
-                           error => _logger($"Unable to reload view: {error}"));
+                .Subscribe(method => Content = method(this));
 
             AppDomain.CurrentDomain.ProcessExit += (sender, args) =>
             {
                 Dispose();
                 Process.GetCurrentProcess().Kill();
             };
+            
             Console.CancelKeyPress += (sender, args) =>
             {
                 Dispose();
