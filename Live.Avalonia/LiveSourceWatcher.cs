@@ -18,7 +18,10 @@ namespace Live.Avalonia
             var projectDirectory = Path.GetDirectoryName(binDirectoryPath);
             if (projectDirectory == null)
                 throw new IOException($"Unable to parent directory of {binDirectoryPath}");
-            
+
+            _logger($"Deleting {binDirectoryPath}");
+            Directory.Delete(binDirectoryPath, true);
+
             _logger($"Executing 'dotnet watch' command from {projectDirectory}");
             _dotnetWatchBuildProcess = new Process
             {

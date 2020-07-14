@@ -1,9 +1,7 @@
 using System;
 using System.Diagnostics;
-using System.Net.Mime;
 using System.Reactive.Linq;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
 
 namespace Live.Avalonia
