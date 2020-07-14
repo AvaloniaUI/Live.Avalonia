@@ -1,8 +1,8 @@
-# Live Avalonia
+# Live.Avalonia
 
-`Live.Avalonia` is an experimental project which intends to have the hot reloading feature working in Avalonia-based multiplatform projects. The core idea of this project was originally proposed by [@Pix2d](https://twitter.com/pix2d) during a discussion in Avalonia Telegram chat. In `Live.Avalonia`, we rely on `dotnet watch build` .NET Core facility for rebuilding an Avalonia project from sources when any of the source files change, and to re-embed the updated controls into a simple `Window`. 
+`Live.Avalonia` is an experimental project which intends to have the hot reloading feature working in Avalonia-based multiplatform projects. The core idea of this project was originally proposed by [@Pix2d](https://twitter.com/pix2d) during a discussion in Avalonia Telegram chat. In `Live.Avalonia`, we rely on `dotnet watch build` .NET Core facility to rebuild an Avalonia project from sources when any of the source files change. Then, we re-embed the updated controls into a simple Avalonia `Window`. 
 
-`Live.Avalonia` could possibly save you a lot of time spent clicking 'Build & Run' in your IDE, or typing `dotnet run` in console. Worth noting, that `Live.Avalonia` doesn't require you to install any particular IDE tooling™ — you can edit files even in [Vim](https://github.com/vim/vim), and the app will hot reload 🔥
+`Live.Avalonia` could possibly save you a lot of time spent clicking 'Build & Run' in your IDE, or typing `dotnet run` in the console. Worth noting, that `Live.Avalonia` doesn't require you to install any particular IDE tooling™ — you can edit files even in [Vim](https://github.com/vim/vim), and the app will hot reload 🔥
 
 <img src="./Live.Avalonia.gif" width="600" />
 
@@ -20,20 +20,31 @@ public class App : Application, ILiveView
 {
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
-    public override void OnFrameworkInitializationCompleted()
+    // This curious method you are seeing here is due to Application Lifetimes. 
+    // See the following Avalonia documentation page for more info:
+    // https://github.com/AvaloniaUI/Avalonia/wiki/Application-lifetimes
+     public override void OnFrameworkInitializationCompleted()
     {
+        // Here, we create a new LiveViewHost, located in the 'Live.Avalonia'
+        // namespace, and pass an ILiveView implementation to it. The ILiveView
+        // implementation should have a parameterless constructor! Next, we
+        // start listening for any changes in the source files. And then, we
+        // show the LiveViewHost window. Simple enough, huh?
         var window = new LiveViewHost(this, Console.WriteLine);
         window.StartWatchingSourceFilesForHotReloading();
         window.Show();
 
         base.OnFrameworkInitializationCompleted();
     }
-
+    
+    // This is a very special method. When any of the source files change,
+    // a new assembly is built, and this method is called. The returned
+    // content gets embedded into the LiveViewHost window.
     public object CreateView(Window window) => new TextBlock { Text = "Hi!" };
 }
 ```
-Then, run your Avalonia application once;
+Then, run your Avalonia application:
 ```
 dotnet run
 ```
-Make any changes in the control returned by the `ILiveView.CreateView` method, and the app will reload immediately!
+Edit the control returned by `ILiveView.CreateView`, and the app will hot reload! 🔥
