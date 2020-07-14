@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.Reactive;
 using System.Reactive.Linq;
 using Avalonia.Controls;
 using Avalonia.Threading;
@@ -42,7 +41,7 @@ namespace Live.Avalonia
             };
         }
 
-        public void StartWatchingProjectFiles()
+        public void StartWatchingSourceFilesForHotReloading()
         {
             _logger("Starting source and assembly file watchers...");
             _sourceWatcher.StartWatchingAssemblySources(_assemblyPath);

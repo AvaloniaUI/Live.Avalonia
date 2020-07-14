@@ -6,7 +6,7 @@ using Avalonia.Controls;
 
 namespace Live.Avalonia
 {
-    public sealed class LiveAssemblyExtractor
+    internal sealed class LiveAssemblyExtractor
     {
         private readonly Action<string> _logger;
 

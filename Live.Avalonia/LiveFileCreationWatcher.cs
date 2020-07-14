@@ -7,7 +7,7 @@ using System.Reactive.Subjects;
 
 namespace Live.Avalonia
 {
-    public sealed class LiveFileCreationWatcher : IDisposable
+    internal sealed class LiveFileCreationWatcher : IDisposable
     {
         private readonly Subject<Unit> _fileChanged = new Subject<Unit>();
         private readonly Action<string> _logger;

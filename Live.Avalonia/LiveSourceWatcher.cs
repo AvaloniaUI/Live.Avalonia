@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Live.Avalonia
 {
-    public class LiveSourceWatcher : IDisposable
+    internal class LiveSourceWatcher : IDisposable
     {
         private readonly Action<string> _logger;
         private Process _dotnetWatchBuildProcess;

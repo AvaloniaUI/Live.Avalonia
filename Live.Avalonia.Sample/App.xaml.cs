@@ -13,9 +13,9 @@ namespace Live.Avalonia.Sample
         public override void OnFrameworkInitializationCompleted()
         {
             var live = new LiveViewHost(this, Console.WriteLine);
-            live.Content = CreateView(live);
-            live.StartWatchingProjectFiles();
+            live.StartWatchingSourceFilesForHotReloading();
             live.Show();
+            
             base.OnFrameworkInitializationCompleted();
         }
 
