@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace Avalonia.Reloading.Tool
+namespace Live.Avalonia
 {
     internal static class Program
     {
@@ -10,7 +10,7 @@ namespace Avalonia.Reloading.Tool
         {
             new AvaloniaReloadingTool(
                     args.Contains("debug")
-                        ? "../Avalonia.Reloading.Sample" 
+                        ? "../Live.Avalonia.Sample" 
                         : Directory.GetCurrentDirectory(), 
                     args.Contains("verbose"), 
                     Console.WriteLine)

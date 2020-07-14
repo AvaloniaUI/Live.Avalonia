@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Reloading.Sample", "Avalonia.Reloading.Sample\Avalonia.Reloading.Sample.csproj", "{5FDAB539-5A65-4247-8C94-3C79130BE68F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Live.Avalonia.Sample", "Live.Avalonia.Sample\Live.Avalonia.Sample.csproj", "{5FDAB539-5A65-4247-8C94-3C79130BE68F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Reloading.Tool", "Avalonia.Reloading.Tool\Avalonia.Reloading.Tool.csproj", "{9690BCC3-7BB8-4620-B366-349CC087A16E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Live.Avalonia", "Live.Avalonia\Live.Avalonia.csproj", "{9690BCC3-7BB8-4620-B366-349CC087A16E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

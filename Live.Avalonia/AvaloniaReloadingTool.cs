@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Avalonia.Reloading.Tool
+namespace Live.Avalonia
 {
     public sealed class AvaloniaReloadingTool
     {

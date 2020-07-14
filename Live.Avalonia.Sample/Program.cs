@@ -1,10 +1,11 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Logging.Serilog;
 using Avalonia.ReactiveUI;
 using JetBrains.Annotations;
 
-namespace Avalonia.Reloading.Sample
+namespace Live.Avalonia.Sample
 {
     public static class Program
     {

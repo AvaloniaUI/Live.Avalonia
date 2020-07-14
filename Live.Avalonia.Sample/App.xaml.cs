@@ -1,6 +1,7 @@
+using Avalonia;
 using Avalonia.Markup.Xaml;
 
-namespace Avalonia.Reloading.Sample
+namespace Live.Avalonia.Sample
 {
     public class App : Application
     {

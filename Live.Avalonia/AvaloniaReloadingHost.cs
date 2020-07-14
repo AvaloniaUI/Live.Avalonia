@@ -4,11 +4,12 @@ using System.IO;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reflection;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
 
-namespace Avalonia.Reloading.Tool
+namespace Live.Avalonia
 {
     public sealed class AvaloniaReloadingHost : IDisposable
     {

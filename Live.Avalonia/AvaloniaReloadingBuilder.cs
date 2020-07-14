@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Build.Evaluation;
 
-namespace Avalonia.Reloading.Tool
+namespace Live.Avalonia
 {
     internal sealed class AvaloniaReloadingBuilder
     {

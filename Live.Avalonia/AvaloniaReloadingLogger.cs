@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Microsoft.Build.Framework;
 
-namespace Avalonia.Reloading.Tool
+namespace Live.Avalonia
 {
     internal sealed class AvaloniaReloadingLogger : ILogger
     {

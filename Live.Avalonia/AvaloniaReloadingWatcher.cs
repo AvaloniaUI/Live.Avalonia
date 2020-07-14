@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace Avalonia.Reloading.Tool
+namespace Live.Avalonia
 {
     public sealed class AvaloniaReloadingWatcher : IDisposable
     {
