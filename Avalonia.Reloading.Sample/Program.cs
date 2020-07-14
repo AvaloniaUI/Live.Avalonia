@@ -27,7 +27,7 @@ namespace Avalonia.Reloading.Sample
                     new Border
                     {
                         Width = 500,
-                        Height = 300,
+                        Height = 150,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
                         Classes = Classes.Parse("Card"),

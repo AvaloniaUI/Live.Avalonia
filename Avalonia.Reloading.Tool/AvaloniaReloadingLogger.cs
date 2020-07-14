@@ -8,11 +8,13 @@ namespace Avalonia.Reloading.Tool
     {
         private readonly Action<string> _logger;
         private readonly string _projectName;
+        private readonly bool _verbose;
         private IEventSource _source;
             
-        public AvaloniaReloadingLogger(string projectName, Action<string> logger)
+        public AvaloniaReloadingLogger(string projectName, bool verbose, Action<string> logger)
         {
             _projectName = projectName;
+            _verbose = verbose;
             _logger = logger;
         }
 
@@ -33,6 +35,7 @@ namespace Avalonia.Reloading.Tool
         private void OnAnyEventRaised(object sender, BuildEventArgs args)
         {
             var message = args.Message;
+            if (_verbose) _logger(message);
             if (!message.EndsWith($"{_projectName}.dll"))
                 return;
 

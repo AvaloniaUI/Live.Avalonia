@@ -8,8 +8,13 @@ namespace Avalonia.Reloading.Tool
     {
         public static void Main(string[] args)
         {
-            var project = args.Contains("debug") ? "../Avalonia.Reloading.Sample" : Directory.GetCurrentDirectory();
-            new AvaloniaReloadingTool(project, Console.WriteLine).Run();
+            new AvaloniaReloadingTool(
+                    args.Contains("debug")
+                        ? "../Avalonia.Reloading.Sample" 
+                        : Directory.GetCurrentDirectory(), 
+                    args.Contains("verbose"), 
+                    Console.WriteLine)
+                .Run();
         }
     }
 }

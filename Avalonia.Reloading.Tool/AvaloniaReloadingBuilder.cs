@@ -11,10 +11,12 @@ namespace Avalonia.Reloading.Tool
     {
         private readonly string _projectDirectory;
         private readonly Action<string> _logger;
+        private readonly bool _verbose;
 
-        public AvaloniaReloadingBuilder(string projectDirectory, Action<string> logger)
+        public AvaloniaReloadingBuilder(string projectDirectory, bool verbose, Action<string> logger)
         {
             _projectDirectory = projectDirectory;
+            _verbose = verbose;
             _logger = logger;
         }
 
@@ -29,7 +31,7 @@ namespace Avalonia.Reloading.Tool
             _logger($"Building project: {projectFile.FullName}");
             var currentProject = new Project(projectFile.FullName);
             var nameWithoutExtension = Path.GetFileNameWithoutExtension(projectFile.Name);
-            var logger = new AvaloniaReloadingLogger(nameWithoutExtension, _logger);
+            var logger = new AvaloniaReloadingLogger(nameWithoutExtension, _verbose, _logger);
             if (!currentProject.Build(logger)) 
                 throw new IOException($"Unable to build {projectFile.Name}");
             _logger($"Successfully managed to build the project {projectFile.Name}");
