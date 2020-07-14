@@ -8,7 +8,7 @@
 
 ### Getting Started
 
-> **A Very Important Note** `Live.Avalonia` setup was tested only on my Ubuntu 18.04 LTS machine on a very little amount of Avalonia projects, and is **not guaranteed** to work elsewhere. However, you could use this tool, if you have free time to experiment and stumble upon some dirty stuff, or if you are willing to help out with the development of `Live.Avalonia` tooling. Thank you for your flexibility.
+> **Important Note** `Live.Avalonia` setup was tested only on my Ubuntu 18.04 LTS machine on a very little amount of Avalonia projects, and is **not guaranteed** to work elsewhere. However, you could use this tool, if you have free time to experiment and stumble upon some dirty stuff, or if you are willing to help out with the development of `Live.Avalonia` tooling. Thank you for your flexibility.
 
 [`Live.Avalonia`](https://www.nuget.org/packages/Live.Avalonia/0.1.0-alpha) is distributed via NuGet package manager:
 ```
@@ -47,4 +47,6 @@ Then, run your Avalonia application:
 ```
 dotnet run
 ```
-Edit the control returned by `ILiveView.CreateView`, and the app will hot reload! 🔥
+Now, edit the control returned by `ILiveView.CreateView`, and the app will hot reload! 🔥
+
+> **Important Note** By default, `dotnet watch build` triggers the build only when `.cs` files change. In order to have live reload working for `.xaml` files too, add the following line to your `.csproj` file: `<Watch Include="**\*.xaml" />`. See `Live.Avalonia.Sample` project for more info.
