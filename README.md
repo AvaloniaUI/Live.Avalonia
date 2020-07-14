@@ -1,42 +1,52 @@
-# Avalonia.HotReload
+# Live.Avalonia
 
-This repository demonstrates how to use the hot reload feature in your Avalonia applications. The core idea is to rely on `dotnet watch` for rebuilding the projects from sources when any of the source files change, and to re-embed the updated controls into the `Window` without any need to press the 'Run' button by hands multiple times.
+`Live.Avalonia` is an experimental project which intends to have the hot reloading feature working in Avalonia-based multiplatform projects. The core idea of this project was originally proposed by [@Pix2d](https://twitter.com/pix2d) during a discussion in Avalonia Telegram chat. In `Live.Avalonia`, we rely on `dotnet watch build` .NET Core facility to rebuild an Avalonia project from sources when any of the source files change. Then, we re-embed the updated controls into a simple Avalonia `Window`. 
 
-<img src="./demo.gif" width="600" />
+`Live.Avalonia` could possibly save you a lot of time spent clicking 'Build & Run' in your IDE, or typing `dotnet run` in the console. Worth noting, that `Live.Avalonia` doesn't require you to install any particular IDE tooling™ — you can edit files even in [Vim](https://github.com/vim/vim), and the app will hot reload 🔥
+
+<img src="./Live.Avalonia.gif" width="600" />
 
 ### Getting Started
 
-1. Create a new project based on a template from the [Avalonia Templates repository](https://github.com/AvaloniaUI/avalonia-dotnet-templates). Or, use [AvaloniaVS](https://marketplace.visualstudio.com/items?itemName=AvaloniaTeam.AvaloniaforVisualStudio).
-2. Install the [`Avalonia.ReactiveUI`](https://www.nuget.org/packages/Avalonia.ReactiveUI/) package into your newly created project:
-```sh
-# Execute this command from the project root.
-dotnet add package Avalonia.ReactiveUI
+> **Important Note** `Live.Avalonia` setup was tested only on my Ubuntu 18.04 LTS machine on a very little amount of Avalonia projects, and is **not guaranteed** to work elsewhere. However, you could use this tool, if you have free time to experiment and stumble upon some dirty stuff, or if you are willing to help out with the development of `Live.Avalonia` tooling. Thank you for your flexibility.
+
+[`Live.Avalonia`](https://www.nuget.org/packages/Live.Avalonia/0.1.0-alpha) is distributed via NuGet package manager:
 ```
-3. Copy-paste the [`AvaloniaReloadingWindow.cs`](./Avalonia.HotReload/AvaloniaReloadingWindow.cs) file into your newly created project.
-4. Create a static method [`CreateReloadableControl`](https://github.com/worldbeater/Avalonia.HotReload/blob/master/Avalonia.HotReload.Sample/Program.cs#L24) in your the `Program.cs` file:
+dotnet add package Live.Avalonia
+```
+After installing the NuGet package, add the following lines to your `App.xaml.cs` file:
 ```cs
-// This method will be the hot-reloadable composition root of your Avalonia application.
-// Remember to use this signature! Otherwise the things won't work.
-public static object CreateReloadableControl(Window window) => new TextBlock { Text = "Ok" };
-```
-5. Instantiate the [`AvaloniaReloadingWindow`](./Avalonia.HotReload/AvaloniaReloadingWindow.cs) in your [`App.xaml.cs`](https://github.com/worldbeater/Avalonia.HotReload/blob/master/Avalonia.HotReload.Sample/App.xaml.cs#L12) file as such:
-```cs
-// Obtain the assembly of the project by doing typeof on any type from the assembly.
-// Then, instantiate the reloading Window class by passing the current project
-// assembly to it, as well as the logger. Then, show the window. Using multiple 
-// reloading windows isn't currently supported.
-var assembly = typeof(App).Assembly;
-var window = new AvaloniaReloadingWindow(assembly, Console.WriteLine);
-window.Show();
-```
-6. Run your project using .NET CLI, as follows:
-```sh
-# Don't use the 'dotnet run' because it is locking the files.
-dotnet ./bin/Debug/netcoreapp3.1/Your.AssemblyName.dll
-```
+public class App : Application, ILiveView
+{
+    public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
-> **Important Note**: Don't use the `dotnet run` command! Always use `dotnet ./path/to/assembly.dll`, or `dotnet build && dotnet ./path/to/assembly.dll`. Otherwise the executable file will get locked, see: https://github.com/dotnet/sdk/issues/11766
+    // This curious method you are seeing here is due to Application Lifetimes. 
+    // See the following Avalonia documentation page for more info:
+    // https://github.com/AvaloniaUI/Avalonia/wiki/Application-lifetimes
+     public override void OnFrameworkInitializationCompleted()
+    {
+        // Here, we create a new LiveViewHost, located in the 'Live.Avalonia'
+        // namespace, and pass an ILiveView implementation to it. The ILiveView
+        // implementation should have a parameterless constructor! Next, we
+        // start listening for any changes in the source files. And then, we
+        // show the LiveViewHost window. Simple enough, huh?
+        var window = new LiveViewHost(this, Console.WriteLine);
+        window.StartWatchingSourceFilesForHotReloading();
+        window.Show();
 
-7. Done! Make some changes in the control returned by `CreateReloadableControl`, press `Ctrl+S` and the app will hot-reload. If you experience any issues with this setup, try cloning this repository and running the `Avalonia.HotReload.Sample` project by executing `dotnet build && dotnet ./bin/Debug/netcoreapp3.1/Avalonia.HotReload.Sample.dll` from the project root.
+        base.OnFrameworkInitializationCompleted();
+    }
+    
+    // This is a very special method. When any of the source files change,
+    // a new assembly is built, and this method is called. The returned
+    // content gets embedded into the LiveViewHost window.
+    public object CreateView(Window window) => new TextBlock { Text = "Hi!" };
+}
+```
+Then, run your Avalonia application:
+```
+dotnet run
+```
+Now, edit the control returned by `ILiveView.CreateView`, and the app will hot reload! 🔥
 
-> **Important Note**: By default, `dotnet watch` tracks changes in `.cs` files only. In order to have hot-reload working with `.xaml` files, add the `<Watch Include="**\*.xaml" />` directive to your `.csproj` file. See the [project file](https://github.com/worldbeater/Avalonia.HotReload/blob/master/Avalonia.HotReload.Sample/Avalonia.HotReload.Sample.csproj) in the demo project for more context.
+> **Important Note** By default, `dotnet watch build` triggers the build only when `.cs` files change. In order to have live reload working for `.xaml` files too, add the following line to your `.csproj` file: `<Watch Include="**\*.xaml" />`. See `Live.Avalonia.Sample` project for more info.
