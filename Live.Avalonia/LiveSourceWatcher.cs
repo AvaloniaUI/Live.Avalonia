@@ -11,7 +11,7 @@ namespace Live.Avalonia
 
         public LiveSourceWatcher(Action<string> logger) => _logger = logger;
 
-        public void StartWatchingAssemblySources(string assemblyPath)
+        public string StartRebuildingAssemblySources(string assemblyPath)
         {
             _logger("Attempting to run 'dotnet watch' command for assembly sources...");
             var binDirectoryPath = FindAscendantDirectory(assemblyPath, "bin");
@@ -19,16 +19,14 @@ namespace Live.Avalonia
             if (projectDirectory == null)
                 throw new IOException($"Unable to parent directory of {binDirectoryPath}");
 
-            _logger($"Deleting {binDirectoryPath}");
-            Directory.Delete(binDirectoryPath, true);
-
-            _logger($"Executing 'dotnet watch' command from {projectDirectory}");
+            var dotnetWatchBuildPath = Path.Combine(projectDirectory, ".live-bin") + Path.DirectorySeparatorChar;
+            _logger($"Executing 'dotnet watch' command from {projectDirectory}, building into {dotnetWatchBuildPath}");
             _dotnetWatchBuildProcess = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = "dotnet",
-                    Arguments = "watch build",
+                    Arguments = $"watch msbuild /p:BaseOutputPath={dotnetWatchBuildPath}",
                     UseShellExecute = true,
                     CreateNoWindow = true,
                     RedirectStandardOutput = false,
@@ -36,8 +34,11 @@ namespace Live.Avalonia
                     WorkingDirectory = projectDirectory
                 }
             };
+            
             _dotnetWatchBuildProcess.Start();
             _logger($"Successfully managed to start 'dotnet watch' process with id {_dotnetWatchBuildProcess.Id}");
+            var separator = Path.DirectorySeparatorChar;
+            return assemblyPath.Replace($"{separator}bin{separator}", $"{separator}.live-bin{separator}");
         }
         
         public void Dispose()

@@ -8,7 +8,7 @@ namespace Live.Avalonia
 {
     public sealed class LiveViewHost : Window, IDisposable
     {
-        private readonly LiveFileCreationWatcher _assemblyWatcher;
+        private readonly LiveFileWatcher _assemblyWatcher;
         private readonly LiveSourceWatcher _sourceWatcher;
         private readonly IDisposable _subscription;
         private readonly Action<string> _logger;
@@ -18,14 +18,14 @@ namespace Live.Avalonia
         {
             _logger = logger;
             _sourceWatcher = new LiveSourceWatcher(logger);
-            _assemblyWatcher = new LiveFileCreationWatcher(logger);
+            _assemblyWatcher = new LiveFileWatcher(logger);
             _assemblyPath = view.GetType().Assembly.Location;
             
             var extractor = new LiveAssemblyExtractor(logger);
             _subscription = _assemblyWatcher
                 .FileChanged
                 .ObserveOn(AvaloniaScheduler.Instance)
-                .Select(unit => extractor.ExtractCreateViewMethod(_assemblyPath))
+                .Select(extractor.ExtractCreateViewMethod)
                 .Subscribe(method => Content = method(this));
 
             AppDomain.CurrentDomain.ProcessExit += (sender, args) =>
@@ -44,8 +44,8 @@ namespace Live.Avalonia
         public void StartWatchingSourceFilesForHotReloading()
         {
             _logger("Starting source and assembly file watchers...");
-            _sourceWatcher.StartWatchingAssemblySources(_assemblyPath);
-            _assemblyWatcher.StartWatchingFileCreation(_assemblyPath);
+            var liveAssemblyPath = _sourceWatcher.StartRebuildingAssemblySources(_assemblyPath);
+            _assemblyWatcher.StartWatchingFileCreation(liveAssemblyPath);
         }
 
         public void Dispose()

@@ -7,17 +7,17 @@ using System.Reactive.Subjects;
 
 namespace Live.Avalonia
 {
-    internal sealed class LiveFileCreationWatcher : IDisposable
+    internal sealed class LiveFileWatcher : IDisposable
     {
-        private readonly Subject<Unit> _fileChanged = new Subject<Unit>();
+        private readonly Subject<string> _fileChanged = new Subject<string>();
         private readonly Action<string> _logger;
         
         private IDisposable _timerSubscription;
-        private string _latestVersion;
+        private string _latestSignature;
 
-        public LiveFileCreationWatcher(Action<string> logger) => _logger = logger;
+        public LiveFileWatcher(Action<string> logger) => _logger = logger;
 
-        public IObservable<Unit> FileChanged => _fileChanged;
+        public IObservable<string> FileChanged => _fileChanged;
 
         public void StartWatchingFileCreation(string filePath)
         {
@@ -29,14 +29,13 @@ namespace Live.Avalonia
 
         private void HandlePeriodicCheck(long checkNumber, string filePath)
         {
-            var fileInfo = new FileInfo(filePath);
-            var latestFileVersion = fileInfo.CreationTime.ToString(CultureInfo.InvariantCulture);
-            if (_latestVersion == latestFileVersion) 
+            var hash = FileHash(filePath);
+            if (_latestSignature == hash)
                 return;
-
-            _logger($"File version has changed, new version is: {_latestVersion} (check #{checkNumber})");
-            _latestVersion = latestFileVersion;
-            _fileChanged.OnNext(Unit.Default);
+            
+            _logger($"File version has changed! (check #{checkNumber})");
+            _latestSignature = hash;
+            _fileChanged.OnNext(filePath);
         }
 
         public void Dispose()
@@ -44,6 +43,13 @@ namespace Live.Avalonia
             _logger("Stopping the file creation watcher timer...");
             _fileChanged.Dispose();
             _timerSubscription?.Dispose();
+        }
+
+        private static string FileHash(string filePath)
+        {
+            using var md5 = System.Security.Cryptography.MD5.Create();
+            var fileBytes = File.ReadAllBytes(filePath);
+            return BitConverter.ToString(md5.ComputeHash(fileBytes));
         }
     }
 }
