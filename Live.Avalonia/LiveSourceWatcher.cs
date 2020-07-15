@@ -19,7 +19,11 @@ namespace Live.Avalonia
             if (projectDirectory == null)
                 throw new IOException($"Unable to parent directory of {binDirectoryPath}");
 
-            var dotnetWatchBuildPath = Path.Combine(projectDirectory, ".live-bin") + Path.DirectorySeparatorChar;
+            _logger($"Preparing .live-bin directory...");
+            var dotnetWatchBuildPath = Path.Combine(binDirectoryPath, ".live-bin") + Path.DirectorySeparatorChar;
+            if (Directory.Exists(dotnetWatchBuildPath))
+                Directory.Delete(dotnetWatchBuildPath, true);
+
             _logger($"Executing 'dotnet watch' command from {projectDirectory}, building into {dotnetWatchBuildPath}");
             _dotnetWatchBuildProcess = new Process
             {
@@ -38,7 +42,7 @@ namespace Live.Avalonia
             _dotnetWatchBuildProcess.Start();
             _logger($"Successfully managed to start 'dotnet watch' process with id {_dotnetWatchBuildProcess.Id}");
             var separator = Path.DirectorySeparatorChar;
-            return assemblyPath.Replace($"{separator}bin{separator}", $"{separator}.live-bin{separator}");
+            return assemblyPath.Replace($"{separator}bin{separator}", $"{separator}bin{separator}.live-bin{separator}");
         }
         
         public void Dispose()
