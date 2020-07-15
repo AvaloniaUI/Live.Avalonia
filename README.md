@@ -1,8 +1,10 @@
+[![nuget](https://img.shields.io/nuget/v/Live.Avalonia.svg)](https://www.nuget.org/packages/Live.Avalonia) [![downloads](https://img.shields.io/nuget/dt/live.avalonia)](https://www.nuget.org/packages/live.Avalonia) ![Size](https://img.shields.io/github/repo-size/worldbeater/live.avalonia.svg) ![License](https://img.shields.io/github/license/worldbeater/live.avalonia.svg) 
+
 # Live.Avalonia
 
-`Live.Avalonia` is an experimental project which intends to have the hot reloading feature working in Avalonia-based multiplatform projects. The core idea of this project was originally proposed by [@Pix2d](https://twitter.com/pix2d) during a discussion in Avalonia Telegram chat. In `Live.Avalonia`, we rely on `dotnet watch build` .NET Core facility to rebuild an Avalonia project from sources when any of the source files change. Then, we re-embed the updated controls into a simple Avalonia `Window`. 
+`Live.Avalonia` is an experimental project which intends to have the hot reloading feature working in Avalonia-based multiplatform projects. The core idea of this project was originally proposed by [@Pix2d](https://twitter.com/pix2d) during a discussion in Avalonia Telegram chat. Thanks to [@TirrKatz](https://twitter.com/TirrKatz) for their help in debugging the tooling!
 
-`Live.Avalonia` could possibly save you a lot of time spent clicking 'Build & Run' in your IDE, or typing `dotnet run` in the console. Worth noting, that `Live.Avalonia` doesn't require you to install any particular IDE tooling™ — you can edit files even in [Vim](https://github.com/vim/vim), and the app will hot reload 🔥
+In `Live.Avalonia`, we rely on `dotnet watch build` .NET Core facility to rebuild an Avalonia project from sources when any of the source files change. Then, we re-embed the updated controls into a simple Avalonia `Window`. `Live.Avalonia` could possibly save you a lot of time spent clicking 'Build & Run' in your IDE, or typing `dotnet run` in the console. Worth noting, that `Live.Avalonia` doesn't require you to install any particular IDE tooling™ — you can edit files even in [Vim](https://github.com/vim/vim), and the app will hot reload 🔥
 
 <img src="./Live.Avalonia.gif" width="600" />
 
