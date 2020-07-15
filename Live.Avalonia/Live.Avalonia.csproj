@@ -12,7 +12,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Copyright (c) 2020 Artyom Gorchakov</Copyright>
     <Authors>Artyom Gorchakov and Contributors</Authors>
-    <Version>0.1.0-alpha</Version>
+    <Version>0.1.1-alpha</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.0" />
