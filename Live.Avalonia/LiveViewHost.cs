@@ -21,12 +21,12 @@ namespace Live.Avalonia
             _assemblyWatcher = new LiveFileWatcher(logger);
             _assemblyPath = view.GetType().Assembly.Location;
             
-            var extractor = new LiveAssemblyExtractor(logger);
+            var loader = new LiveControlLoader(logger);
             _subscription = _assemblyWatcher
                 .FileChanged
                 .ObserveOn(AvaloniaScheduler.Instance)
-                .Select(extractor.ExtractCreateViewMethod)
-                .Subscribe(method => Content = method(this));
+                .Select(path => loader.LoadControl(path, this))
+                .Subscribe(control => Content = control);
 
             AppDomain.CurrentDomain.ProcessExit += (sender, args) =>
             {

@@ -29,6 +29,9 @@ namespace Live.Avalonia
 
         private void HandlePeriodicCheck(long checkNumber, string filePath)
         {
+            if (!File.Exists(filePath))
+                return;
+            
             var hash = FileHash(filePath);
             if (_latestSignature == hash)
                 return;

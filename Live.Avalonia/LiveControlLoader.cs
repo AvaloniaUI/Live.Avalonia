@@ -3,16 +3,17 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Avalonia.Controls;
+using Avalonia.Layout;
 
 namespace Live.Avalonia
 {
-    internal sealed class LiveAssemblyExtractor
+    internal sealed class LiveControlLoader
     {
         private readonly Action<string> _logger;
 
-        public LiveAssemblyExtractor(Action<string> logger) => _logger = logger;
+        public LiveControlLoader(Action<string> logger) => _logger = logger;
 
-        public Func<Window, object> ExtractCreateViewMethod(string assemblyPath)
+        public object LoadControl(string assemblyPath, Window window)
         {
             try
             {
@@ -39,13 +40,15 @@ namespace Live.Avalonia
                 if (method == null)
                     throw new TypeLoadException($"Unable to obtain {nameof(ILiveView.CreateView)} method!");
 
-                _logger($"Successfully managed to obtain the method {nameof(ILiveView.CreateView)}");
-                return window => method.Invoke(instance, new object[] {window});
+                _logger($"Successfully managed to obtain the method {nameof(ILiveView.CreateView)}, creating control.");
+                return method.Invoke(instance, new object[] {window});
             }
             catch (Exception exception)
             {
-                return window => new TextBlock
+                return new TextBlock
                 {
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
                     Text = exception.ToString()
                 };
             }
