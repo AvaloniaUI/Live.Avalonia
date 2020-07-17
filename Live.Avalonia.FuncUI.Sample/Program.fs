@@ -11,17 +11,9 @@ open Avalonia.FuncUI.Elmish
 open Avalonia.FuncUI.Components.Hosts
 
 
-type MainWindow() as this =
-    inherit HostWindow()
+type MainControl() as this =
+    inherit HostControl()
     do
-        base.Title <- "Live.Avalonia.FuncUI.Sample"
-        base.Width <- 400.0
-        base.Height <- 400.0
-        
-        //this.VisualRoot.VisualRoot.Renderer.DrawFps <- true
-        //this.VisualRoot.VisualRoot.Renderer.DrawDirtyRects <- true
-
-
         Elmish.Program.mkSimple (fun () -> Counter.init) Counter.update Counter.view
         |> Program.withHost this
         |> Program.run
@@ -29,9 +21,9 @@ type MainWindow() as this =
         
 type App() =
     inherit Application()
-
+    
     interface ILiveView with
-        member this.CreateView(window: Window) = MainWindow() :> obj
+        member __.CreateView(window: Window) = MainControl() :> obj
 
     override this.Initialize() =
         this.Styles.Load "avares://Avalonia.Themes.Default/DefaultTheme.xaml"
