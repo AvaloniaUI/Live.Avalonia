@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -36,7 +37,13 @@ namespace Live.Avalonia
                 _logger("Successfully managed to obtain ILiveView interface implementation, activating...");
                 var liveViewType = allImplementations.First();
                 var instance = Activator.CreateInstance(liveViewType);
-                var method = liveViewType.GetMethod(nameof(ILiveView.CreateView));
+                var name = nameof(ILiveView);
+                Debug.WriteLine(name);
+                foreach (var item in liveViewType.GetMethods())
+                {
+                    Debug.WriteLine(item.Name);
+                }
+                var method = liveViewType.GetMethod(name);
                 if (method == null)
                     throw new TypeLoadException($"Unable to obtain {nameof(ILiveView.CreateView)} method!");
 

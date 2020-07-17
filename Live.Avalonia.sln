@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Live.Avalonia.Sample", "Liv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Live.Avalonia", "Live.Avalonia\Live.Avalonia.csproj", "{9690BCC3-7BB8-4620-B366-349CC087A16E}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Live.Avalonia.FuncUI.Sample", "Live.Avalonia.FuncUI.Sample\Live.Avalonia.FuncUI.Sample.fsproj", "{90493830-8A59-455C-BD1F-50B48A2B2D0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{9690BCC3-7BB8-4620-B366-349CC087A16E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9690BCC3-7BB8-4620-B366-349CC087A16E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9690BCC3-7BB8-4620-B366-349CC087A16E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90493830-8A59-455C-BD1F-50B48A2B2D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90493830-8A59-455C-BD1F-50B48A2B2D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90493830-8A59-455C-BD1F-50B48A2B2D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90493830-8A59-455C-BD1F-50B48A2B2D0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
