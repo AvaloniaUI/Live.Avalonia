@@ -37,7 +37,7 @@ namespace Live.Avalonia
                 _logger("Successfully managed to obtain ILiveView interface implementation, activating...");
                 var liveViewType = allImplementations.First();
                 var instance = Activator.CreateInstance(liveViewType);
-                var name = nameof(ILiveView);
+                var name = nameof(ILiveView.CreateView);
                 Debug.WriteLine(name);
                 foreach (var item in liveViewType.GetMethods())
                 {
