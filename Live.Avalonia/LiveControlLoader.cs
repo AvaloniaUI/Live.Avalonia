@@ -38,10 +38,9 @@ namespace Live.Avalonia
                 var liveViewType = allImplementations.First();
                 var instance = Activator.CreateInstance(liveViewType);
                 var name = nameof(ILiveView.CreateView);
-                Debug.WriteLine(name);
                 foreach (var item in liveViewType.GetMethods())
                 {
-                    Debug.WriteLine(item.Name);
+                    Debug.WriteLine($"Method: {item.Name} == {name} : {item.Name == name}");
                 }
                 var method = liveViewType.GetMethod(name);
                 if (method == null)
