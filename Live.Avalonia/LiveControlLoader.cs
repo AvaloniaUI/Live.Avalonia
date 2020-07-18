@@ -42,10 +42,15 @@ namespace Live.Avalonia
                 {
                     Debug.WriteLine($"Method: {item.Name} == {name} : {item.Name == name}");
                 }
-                var method = liveViewType.GetMethod(name);
+                
+                var method =
+                    liveViewType.GetMethod(name) != null
+                        ? liveViewType.GetMethod(name)
+                        : interfaceType.GetMethod(name);
+
                 if (method == null)
                     throw new TypeLoadException($"Unable to obtain {nameof(ILiveView.CreateView)} method!");
-
+                
                 _logger($"Successfully managed to obtain the method {nameof(ILiveView.CreateView)}, creating control.");
                 return method.Invoke(instance, new object[] {window});
             }
