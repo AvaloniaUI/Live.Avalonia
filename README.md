@@ -10,7 +10,7 @@ In `Live.Avalonia`, we rely on `dotnet watch build` .NET Core facility to rebuil
 
 ### Getting Started
 
-> **Warning** `Live.Avalonia` was not extensively tested, and is not guaranteed to work with every project setup, especially if you do some extraordiany stuff with weird MSBuild properties and your output assemblies. Use this tool at your own risk. Thank you for your flexibility.
+> **Warning** `Live.Avalonia` was not extensively tested, and is not guaranteed to work with every project setup, especially if you do some extraordinary stuff with weird MSBuild properties and your output assemblies. Use this tool at your own risk. Thank you for your flexibility.
 
 > **Important Note** By default, `dotnet watch build` triggers the build only when any `.cs` file changes. In order to have live reload working for `.xaml` files too, add the following line to your `.csproj` file: `<Watch Include="**\*.xaml" />`. See the [`Live.Avalonia.Sample`](https://github.com/worldbeater/Live.Avalonia/blob/master/Live.Avalonia.Sample/Live.Avalonia.Sample.csproj#L16) project for more info.
 
