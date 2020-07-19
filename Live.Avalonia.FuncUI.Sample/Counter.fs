@@ -27,7 +27,7 @@ module Counter =
                 Button.create [
                     Button.dock Dock.Bottom
                     Button.onClick (fun _ -> dispatch Decrement)
-                    Button.content "--"
+                    Button.content "-"
                 ]
                 Button.create [
                     Button.dock Dock.Bottom
