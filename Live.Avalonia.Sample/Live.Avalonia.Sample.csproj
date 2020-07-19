@@ -22,6 +22,7 @@
         <PackageReference Include="Citrus.Avalonia" Version="1.2.6" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\Live.Avalonia.Library\Live.Avalonia.Library.csproj" />
       <ProjectReference Include="..\Live.Avalonia\Live.Avalonia.csproj" />
     </ItemGroup>
 </Project>

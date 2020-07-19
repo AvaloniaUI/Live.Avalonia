@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="ReactiveUI.Validation" Version="1.4.15" />
+        <PackageReference Include="ReactiveUI.Fody" Version="11.4.17" />
+    </ItemGroup>
+</Project>
