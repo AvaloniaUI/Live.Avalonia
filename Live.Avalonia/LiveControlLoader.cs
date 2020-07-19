@@ -38,15 +38,8 @@ namespace Live.Avalonia
                 var liveViewType = allImplementations.First();
                 var instance = Activator.CreateInstance(liveViewType);
                 var name = nameof(ILiveView.CreateView);
-                foreach (var item in liveViewType.GetMethods())
-                {
-                    Debug.WriteLine($"Method: {item.Name} == {name} : {item.Name == name}");
-                }
-                
-                var method =
-                    liveViewType.GetMethod(name) != null
-                        ? liveViewType.GetMethod(name)
-                        : interfaceType.GetMethod(name);
+
+                var method = liveViewType.GetMethod(name) ?? interfaceType.GetMethod(name);
 
                 if (method == null)
                     throw new TypeLoadException($"Unable to obtain {nameof(ILiveView.CreateView)} method!");
