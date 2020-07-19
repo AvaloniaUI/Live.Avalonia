@@ -50,6 +50,8 @@ dotnet run
 ```
 Now, edit the control returned by `ILiveView.CreateView`, and the app will hot reload! 🔥
 
+> **Pro tip** If you are willing to use an assembly weaving tool like [ReactiveUI.Fody](https://www.reactiveui.net/docs/handbook/view-models/boilerplate-code) for `INotifyPropertyChanged` injections, extract your view models to a separate assembly. For example, the [`Live.Avalonia.Sample`](https://github.com/worldbeater/Live.Avalonia/blob/master/Live.Avalonia.Sample/Live.Avalonia.Sample.csproj#L16) project references the [`Live.Avalonia.Sample.Library`](https://github.com/worldbeater/Live.Avalonia/tree/main/Live.Avalonia.Sample.Library) project in order to have assembly postprocessing working as expected.
+
 ### Retaining App State
 
 As we discovered in [this Twitter thread](https://twitter.com/MihaMarkic/status/1283345704405082112), the state is retained, if you keep it in your [ViewModel](https://www.reactiveui.net/docs/handbook/view-models/) and pass it from `Window` to your `View` inside the `ILiveView.CreateView` method. So, if you are willing to keep app state the same after a hot reload, use the following `ILiveView.CreateView` implementation: 
@@ -68,6 +70,6 @@ public object CreateView(Window window) {
 
 ### Getting Started with F#
 
-Thanks to @AngelMunoz and @JaggerJo `Live.Avalonia` now supports MVU and [`Avalonia.FuncUI`](https://github.com/AvaloniaCommunity/Avalonia.FuncUI) as well. See the [`Live.Avalonia.FuncUI.Sample`](https://github.com/worldbeater/Live.Avalonia/tree/main/Live.Avalonia.FuncUI.Sample) directory in this repository for a compelling example. The composition root is located inside the [Program.cs](https://github.com/worldbeater/Live.Avalonia/blob/main/Live.Avalonia.FuncUI.Sample/Program.fs#L35) file.
+Thanks to [@AngelMunoz](https://github.com/angelmunoz) and to [@JaggerJo](https://github.com/jaggerjo) `Live.Avalonia` now supports MVU and [`Avalonia.FuncUI`](https://github.com/AvaloniaCommunity/Avalonia.FuncUI) as well. See the [`Live.Avalonia.FuncUI.Sample`](https://github.com/worldbeater/Live.Avalonia/tree/main/Live.Avalonia.FuncUI.Sample) directory in this repository for a compelling example. The composition root is located inside the [Program.fs](https://github.com/worldbeater/Live.Avalonia/blob/main/Live.Avalonia.FuncUI.Sample/Program.fs#L35) file.
 
 > **Important Note** By default, `dotnet watch build` triggers the build only when any `.cs` file changes. In order to have live reload working for `.fs` files too, add the following line to your `.csproj` file: `<Watch Include="**\*.fs" />`. See the [`Live.Avalonia.FuncUI.Sample`](https://github.com/worldbeater/Live.Avalonia/blob/main/Live.Avalonia.FuncUI.Sample/Live.Avalonia.FuncUI.Sample.fsproj#L15) project for more info.
