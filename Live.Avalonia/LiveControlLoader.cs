@@ -13,7 +13,7 @@ namespace Live.Avalonia
 
         public LiveControlLoader(Action<string> logger) => _logger = logger;
 
-        public object LoadControl(string assemblyPath, Window window)
+        public void LoadControl(string assemblyPath, Window window)
         {
             try
             {
@@ -37,18 +37,17 @@ namespace Live.Avalonia
                 var liveViewType = allImplementations.First();
                 var instance = Activator.CreateInstance(liveViewType);
                 var name = nameof(ILiveView.CreateView);
-
                 var method = liveViewType.GetMethod(name) ?? interfaceType.GetMethod(name);
 
                 if (method == null)
                     throw new TypeLoadException($"Unable to obtain {nameof(ILiveView.CreateView)} method!");
 
                 _logger($"Successfully managed to obtain the method {nameof(ILiveView.CreateView)}, creating control.");
-                return method.Invoke(instance, new object[] { window });
+                window.Content = method.Invoke(instance, new object[] { window });
             }
             catch (Exception exception)
             {
-                return new TextBlock
+                window.Content = new TextBlock
                 {
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,

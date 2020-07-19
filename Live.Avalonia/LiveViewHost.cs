@@ -25,20 +25,11 @@ namespace Live.Avalonia
             _subscription = _assemblyWatcher
                 .FileChanged
                 .ObserveOn(AvaloniaScheduler.Instance)
-                .Select(path => loader.LoadControl(path, this))
-                .Subscribe(control => Content = control);
+                .Subscribe(path => loader.LoadControl(path, this));
 
-            AppDomain.CurrentDomain.ProcessExit += (sender, args) =>
-            {
-                Dispose();
-                Process.GetCurrentProcess().Kill();
-            };
-            
-            Console.CancelKeyPress += (sender, args) =>
-            {
-                Dispose();
-                Process.GetCurrentProcess().Kill();
-            };
+            Console.CancelKeyPress += (sender, args) => Clean("Console Ctrl+C key press.", false);
+            AppDomain.CurrentDomain.ProcessExit += (sender, args) => Clean("Process termination.", false);
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) => Clean(args.ExceptionObject.ToString(), true);
         }
 
         public void StartWatchingSourceFilesForHotReloading()
@@ -55,6 +46,18 @@ namespace Live.Avalonia
             _assemblyWatcher.Dispose();
             _subscription.Dispose();
             _logger("Successfully disposed LiveViewHost internals.");
+        }
+
+        private void Clean(string reason, bool exception)
+        {
+            _logger($"Closing live reloading window due to: {reason}");
+            if (exception)
+                _logger("\nNote: To prevent your app from crashing, properly handle all exceptions causing a crash.\n" +
+                        "If you are using ReactiveUI and ReactiveCommand<,>s, make sure you subscribe to " +
+                        "RxApp.DefaultExceptionHandler: https://reactiveui.net/docs/handbook/default-exception-handler\n" +
+                        "If you are using another framework, refer to its docs considering global exception handling.\n");
+            Dispose();
+            Process.GetCurrentProcess().Kill();
         }
     }
 }
