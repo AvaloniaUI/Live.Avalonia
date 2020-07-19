@@ -4,7 +4,7 @@ using ReactiveUI.Fody.Helpers;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 
-namespace Live.Avalonia.Library
+namespace Live.Avalonia.Sample.Library
 {
     public class AppViewModel : ReactiveValidationObject<AppViewModel>
     {

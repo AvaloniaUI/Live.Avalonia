@@ -1,6 +1,6 @@
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
-using Live.Avalonia.Library;
+using Live.Avalonia.Sample.Library;
 using ReactiveUI;
 
 namespace Live.Avalonia.Sample

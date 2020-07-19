@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Live.Avalonia", "Live.Avalo
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Live.Avalonia.FuncUI.Sample", "Live.Avalonia.FuncUI.Sample\Live.Avalonia.FuncUI.Sample.fsproj", "{90493830-8A59-455C-BD1F-50B48A2B2D0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Live.Avalonia.Library", "Live.Avalonia.Library\Live.Avalonia.Library.csproj", "{5CA59900-E7B3-4DC0-9C70-89A5B7514290}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Live.Avalonia.Sample.Library", "Live.Avalonia.Sample.Library\Live.Avalonia.Sample.Library.csproj", "{5CA59900-E7B3-4DC0-9C70-89A5B7514290}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,9 +1,8 @@
 using System;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
-using Live.Avalonia.Library;
+using Live.Avalonia.Sample.Library;
 
 namespace Live.Avalonia.Sample
 {
