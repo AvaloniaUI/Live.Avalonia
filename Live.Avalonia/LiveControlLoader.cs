@@ -43,9 +43,9 @@ namespace Live.Avalonia
 
                 if (method == null)
                     throw new TypeLoadException($"Unable to obtain {nameof(ILiveView.CreateView)} method!");
-                
+
                 _logger($"Successfully managed to obtain the method {nameof(ILiveView.CreateView)}, creating control.");
-                return method.Invoke(instance, new object[] {window});
+                return method.Invoke(instance, new object[] { window });
             }
             catch (Exception exception)
             {
