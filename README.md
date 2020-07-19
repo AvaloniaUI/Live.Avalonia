@@ -55,18 +55,11 @@ public class App : Application, ILiveView
         RxApp.DefaultExceptionHandler = Observer.Create<Exception>(Console.WriteLine);
         base.OnFrameworkInitializationCompleted();
     }
-    
-    // When any of the source files change, a new version of
-    // the assembly is built, and this method gets called.
-    // The returned content gets embedded into the window.
-    public object CreateView(Window window)
-    {
-        // The AppView class will inherit the DataContext
-        // of the window. The AppView class can be a 
-        // UserControl, a Grid, a TextBlock, whatever.
-        window.DataContext ??= new AppViewModel();
-        return new AppView();
-    }
+
+    // When any of the source files change, a new version of the assembly is 
+    // built, and this method gets called. The returned content gets embedded 
+    // into the LiveViewHost window.
+    public object CreateView(Window window) => new TextBlock { Text = "Hi!" };
 }
 ```
 Then, run your Avalonia application:
@@ -75,7 +68,7 @@ dotnet run
 ```
 Now, edit the control returned by `ILiveView.CreateView`, and the app will hot reload! 🔥
 
-> **Pro tip** If you are willing to use an assembly weaving tool like [ReactiveUI.Fody](https://www.reactiveui.net/docs/handbook/view-models/boilerplate-code) for `INotifyPropertyChanged` injections, extract your view models to a separate assembly. For example, the [`Live.Avalonia.Sample`](https://github.com/worldbeater/Live.Avalonia/blob/master/Live.Avalonia.Sample/Live.Avalonia.Sample.csproj#L16) project references the [`Live.Avalonia.Sample.Library`](https://github.com/worldbeater/Live.Avalonia/tree/main/Live.Avalonia.Sample.Library) project in order to have assembly postprocessing working as expected.
+> **Pro tip** If you are willing to use an assembly weaving tool like [ReactiveUI.Fody](https://www.reactiveui.net/docs/handbook/view-models/boilerplate-code) for `INotifyPropertyChanged` injections, extract your view models into a separate assembly. For example, the [`Live.Avalonia.Sample`](https://github.com/worldbeater/Live.Avalonia/blob/master/Live.Avalonia.Sample/Live.Avalonia.Sample.csproj#L16) project references the [`Live.Avalonia.Sample.Library`](https://github.com/worldbeater/Live.Avalonia/tree/main/Live.Avalonia.Sample.Library) project in order to have assembly postprocessing working as expected. Beware: if you change the code in the referenced assemblies, the app won't hot reload, and you will have to restart the app on your own to see changes.
 
 ### Retaining App State
 
