@@ -2,17 +2,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>true</IsPackable>
-    <AssemblyName>Live.Avalonia</AssemblyName>
-    <Description>Avalonia live reloading window.</Description>
-    <PackageTags>dotnet, reloading, avalonia, avaloniaui, xaml</PackageTags>
-    <RepositoryUrl>https://github.com/worldbeater/avalonia.hotreload.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl>https://github.com/worldbeater/avalonia.hotreload</PackageProjectUrl>
-    <PackageOutputPath>./nupkg</PackageOutputPath>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Copyright>Copyright (c) 2020 Artyom Gorchakov</Copyright>
-    <Authors>Artyom Gorchakov and Contributors</Authors>
-    <Version>1.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.11" />
