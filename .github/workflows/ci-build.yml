@@ -36,14 +36,12 @@ jobs:
 
     - name: NuGet Restore
       run: dotnet restore
-      working-directory: src
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1
 
     - name: Build
       run: dotnet build --configuration ${{ env.configuration }}
-      working-directory: src
 
     - name: Create NuGet Artifacts
       uses: actions/upload-artifact@master
