@@ -17,10 +17,10 @@
         <Watch Include="**\*.xaml" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="0.9.11" />
-        <PackageReference Include="Avalonia.Desktop" Version="0.9.11" />
-        <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.11" />
-        <PackageReference Include="Citrus.Avalonia" Version="1.2.6" />
+        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\Live.Avalonia.Sample.Library\Live.Avalonia.Sample.Library.csproj" />
