@@ -1,18 +1,16 @@
-<UserControl 
+<UserControl
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Background="{DynamicResource ThemeBackgroundColor}"
     x:Class="Live.Avalonia.Sample.AppView">
     <!-- Try editing the code below after launching the app -->
-    <Border HorizontalAlignment="Center" 
-            VerticalAlignment="Center" 
-            Classes="Card" 
+    <Border HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             Width="350">
         <StackPanel>
-            <TextBox HorizontalAlignment="Stretch" 
-                     Watermark="Please, enter your name..." 
+            <TextBox HorizontalAlignment="Stretch"
+                     Watermark="Please, enter your name..."
                      Text="{Binding Name}" />
-            <Button Content="Execute the command" 
+            <Button Content="Execute the command"
                     Command="{Binding Execute}"/>
         </StackPanel>
     </Border>
