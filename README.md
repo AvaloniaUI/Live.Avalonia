@@ -26,7 +26,7 @@ public class App : Application, ILiveView
 
     public override void OnFrameworkInitializationCompleted()
     {
-        if (Debugger.IsAttached)
+        if (Debugger.IsAttached || IsRelease())
         {
             // Debugging requires pdb loading etc, so we disable live reloading
             // during a test run with an attached debugger.
@@ -60,6 +60,15 @@ public class App : Application, ILiveView
     // built, and this method gets called. The returned content gets embedded 
     // into the LiveViewHost window.
     public object CreateView(Window window) => new TextBlock { Text = "Hi!" };
+
+    private static bool IsRelease()
+    {
+#if RELEASE
+        return true;
+#else
+        return false;
+#endif
+    }
 }
 ```
 Then, run your Avalonia application:
