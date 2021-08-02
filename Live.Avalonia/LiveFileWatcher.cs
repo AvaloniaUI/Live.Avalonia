@@ -11,7 +11,7 @@ namespace Live.Avalonia
         readonly Subject<string> _fileChanged = new Subject<string>();
         readonly Action<string> _logger;
 
-        FileSystemWatcher watcher = new FileSystemWatcher()
+        readonly FileSystemWatcher watcher = new FileSystemWatcher()
         {
             EnableRaisingEvents = false
         };
