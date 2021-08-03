@@ -6,7 +6,7 @@ using ReactiveUI.Validation.Helpers;
 
 namespace Live.Avalonia.Sample.Library
 {
-    public class AppViewModel : ReactiveValidationObject<AppViewModel>
+    public class AppViewModel : ReactiveValidationObject
     {
         public AppViewModel()
         {
