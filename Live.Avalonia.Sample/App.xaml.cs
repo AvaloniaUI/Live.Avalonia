@@ -15,10 +15,11 @@ namespace Live.Avalonia.Sample
 
         public override void OnFrameworkInitializationCompleted()
         {
-            if (Debugger.IsAttached)
+            if (Debugger.IsAttached || IsProduction())
             {
                 // Debugging requires pdb loading etc, so we disable live reloading
                 // during a test run with an attached debugger.
+                // Disable live reload in production
                 var window = new Window();
                 window.Content = CreateView(window);
                 window.Show();
@@ -55,6 +56,15 @@ namespace Live.Avalonia.Sample
             // UserControl, a Grid, a TextBlock, whatever.
             window.DataContext ??= new AppViewModel();
             return new AppView();
+        }
+
+        static bool IsProduction()
+        {
+#if DEBUG
+            return false;
+#else
+            return true;
+#endif
         }
     }
 }

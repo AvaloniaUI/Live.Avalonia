@@ -26,6 +26,13 @@ let transferState<'t> oldState =
         Console.Write $"Error restoring state: {ex}"
         None
     
+let isProduction =
+    #if DEBUG
+        false
+    #else
+        true
+    #endif
+    
 type MainControl(window: Window) as this =
     inherit HostControl()
     do
@@ -58,9 +65,17 @@ type App() =
     override this.OnFrameworkInitializationCompleted() =
         match this.ApplicationLifetime with
         | :? IClassicDesktopStyleApplicationLifetime as desktopLifetime ->
-            let window = new LiveViewHost(this, fun msg -> printfn $"%s{msg}")
-            window.StartWatchingSourceFilesForHotReloading()
-            window.Show()
+            
+            // Disable live reload in production
+            if isProduction then 
+                let window = Window()
+                window.Content <- (this :> ILiveView).CreateView(window)
+                window.Show()
+            else
+                let window = new LiveViewHost(this, fun msg -> printfn $"%s{msg}")
+                window.StartWatchingSourceFilesForHotReloading()
+                window.Show()
+            
             base.OnFrameworkInitializationCompleted()
         | _ -> ()
 

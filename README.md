@@ -26,7 +26,7 @@ public class App : Application, ILiveView
 
     public override void OnFrameworkInitializationCompleted()
     {
-        if (Debugger.IsAttached || IsRelease())
+        if (Debugger.IsAttached || IsProduction())
         {
             // Debugging requires pdb loading etc, so we disable live reloading
             // during a test run with an attached debugger.
@@ -61,12 +61,12 @@ public class App : Application, ILiveView
     // into the LiveViewHost window.
     public object CreateView(Window window) => new TextBlock { Text = "Hi!" };
 
-    private static bool IsRelease()
+    private static bool IsProduction()
     {
-#if RELEASE
-        return true;
-#else
+#if DEBUG
         return false;
+#else
+        return true;
 #endif
     }
 }
