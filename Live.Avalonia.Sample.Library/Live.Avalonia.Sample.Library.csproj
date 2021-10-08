@@ -4,7 +4,7 @@
         <IsPackable>false</IsPackable>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="ReactiveUI.Validation" Version="2.1.1" />
+        <PackageReference Include="ReactiveUI.Validation" Version="2.2.1" />
         <PackageReference Include="ReactiveUI.Fody" Version="16.2.6" />
     </ItemGroup>
 </Project>
