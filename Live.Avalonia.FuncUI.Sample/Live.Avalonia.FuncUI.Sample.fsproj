@@ -18,7 +18,7 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
-        <PackageReference Include="FSharp.SystemTextJson" Version="0.17.4" />
+        <PackageReference Include="FSharp.SystemTextJson" Version="0.19.13" />
         <PackageReference Include="JaggerJo.Avalonia.FuncUI" Version="$(FuncUIVersion)" />
         <PackageReference Include="JaggerJo.Avalonia.FuncUI.DSL" Version="$(FuncUIVersion)" />
         <PackageReference Include="JaggerJo.Avalonia.FuncUI.Elmish" Version="$(FuncUIVersion)" />
