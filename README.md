@@ -2,7 +2,7 @@
 
 # Live.Avalonia
 
-`Live.Avalonia` is an experimental project which intends to make the hot reloading feature working in Avalonia-based applications. The core idea of this project was originally proposed by [@Pix2d](https://twitter.com/pix2d) during a discussion in Avalonia Telegram chat. Thanks to [@TirrKatz](https://twitter.com/TirrKatz) for their help in debugging the tooling!
+`Live.Avalonia` is an experimental project which intends to make the hot reloading feature working in Avalonia-based applications.
 
 <img src="./Live.Avalonia.gif" width="500" />
 
