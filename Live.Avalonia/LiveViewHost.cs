@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Reactive.Linq;
 using Avalonia.Controls;
-using Avalonia.Threading;
+using Avalonia.ReactiveUI;
 
 namespace Live.Avalonia
 {

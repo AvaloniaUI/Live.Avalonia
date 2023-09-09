@@ -14,16 +14,22 @@
     </ItemGroup>
     <ItemGroup>
         <!-- Add the 'Watch' directive to watch for XAML file changes. -->
-        <Watch Include="**\*.xaml" />
+        <Watch Include="**\*.xaml"/>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <!--Overriding it to allow run demo app on latest version-->
+        <AvaloniaVersion>11.0.0</AvaloniaVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)"/>
+        <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)"/>
+        <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)"/>
+        <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
-        <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
-        <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
-        <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\Live.Avalonia.Sample.Library\Live.Avalonia.Sample.Library.csproj" />
-      <ProjectReference Include="..\Live.Avalonia\Live.Avalonia.csproj" />
+        <ProjectReference Include="..\Live.Avalonia.Sample.Library\Live.Avalonia.Sample.Library.csproj"/>
+        <ProjectReference Include="..\Live.Avalonia\Live.Avalonia.csproj"/>
     </ItemGroup>
 </Project>
