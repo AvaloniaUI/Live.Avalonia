@@ -3,7 +3,7 @@
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <IsPackable>false</IsPackable>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,10 +18,10 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
         <PackageReference Include="FSharp.SystemTextJson" Version="1.1.23" />
-        <PackageReference Include="JaggerJo.Avalonia.FuncUI" Version="$(FuncUIVersion)" />
-        <PackageReference Include="JaggerJo.Avalonia.FuncUI.DSL" Version="$(FuncUIVersion)" />
-        <PackageReference Include="JaggerJo.Avalonia.FuncUI.Elmish" Version="$(FuncUIVersion)" />
+        <PackageReference Include="Avalonia.FuncUI" Version="$(FuncUIVersion)" />
+        <PackageReference Include="Avalonia.FuncUI.Elmish" Version="$(FuncUIVersion)" />
     </ItemGroup>
 
     <ItemGroup>

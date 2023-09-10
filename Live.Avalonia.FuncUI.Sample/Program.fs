@@ -3,6 +3,7 @@
 open System
 open System.Text.Json
 open System.Text.Json.Serialization
+open Avalonia.Themes.Fluent
 open Elmish
 open Avalonia
 open Avalonia.Controls
@@ -10,7 +11,6 @@ open Avalonia.Controls.ApplicationLifetimes
 open Live.Avalonia
 open Avalonia.FuncUI
 open Avalonia.FuncUI.Elmish
-open Avalonia.FuncUI.Components.Hosts
 
 let transferState<'t> oldState =
     let jsonOptions = JsonSerializerOptions()
@@ -34,7 +34,7 @@ let isProduction =
     #endif
     
 type MainControl(window: Window) as this =
-    inherit HostControl()
+    inherit Hosts.HostControl()
     do
         // Instead of just creating default init state, try to recover state from window.DataContext
         let hotInit () = 
@@ -47,7 +47,11 @@ type MainControl(window: Window) as this =
         Elmish.Program.mkSimple hotInit Counter.update Counter.view
         |> Program.withHost this
         // Every time state changes, save state to window.DataContext
-        |> Program.withTrace (fun _ state -> window.DataContext <- state)
+        |> Program.withTrace (fun model state ->
+            let setDataContext (subIds: SubId list) =
+                window.DataContext <- state
+                () // return unit
+            setDataContext)
         |> Program.run
 
         
@@ -59,8 +63,7 @@ type App() =
             MainControl(window) :> obj
 
     override this.Initialize() =
-        this.Styles.Load "avares://Avalonia.Themes.Default/DefaultTheme.xaml"
-        this.Styles.Load "avares://Avalonia.Themes.Default/Accents/BaseDark.xaml"
+        this.Styles.Add (FluentTheme())
 
     override this.OnFrameworkInitializationCompleted() =
         match this.ApplicationLifetime with
