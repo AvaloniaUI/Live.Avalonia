@@ -22,7 +22,7 @@
 <!-- region package versions -->
     <PropertyGroup>
         <AvaloniaVersion>11.0.0</AvaloniaVersion>
-        <FuncUIVersion>0.5.0-beta</FuncUIVersion>
+        <FuncUIVersion>1.0.1</FuncUIVersion>
     </PropertyGroup>
 <!-- endregion -->
 </Project>
