@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
@@ -19,7 +19,7 @@
     <ItemGroup>
         <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
         <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
-        <PackageReference Include="FSharp.SystemTextJson" Version="1.1.23" />
+        <PackageReference Include="FSharp.SystemTextJson" Version="1.2.42" />
         <PackageReference Include="Avalonia.FuncUI" Version="$(FuncUIVersion)" />
         <PackageReference Include="Avalonia.FuncUI.Elmish" Version="$(FuncUIVersion)" />
     </ItemGroup>
